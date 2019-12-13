@@ -45,6 +45,7 @@ services:
       - 5601:5601
     environment:
       - ELASTICSEARCH_HOSTS=http://db:9200
+      - SERVER_NAME=localhost
     networks:
       - webnet
     depends_on: 
