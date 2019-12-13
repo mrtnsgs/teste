@@ -10,6 +10,8 @@ services:
       - 8080
     networks:
       - webnet
+    depends_on:
+      - proxy
 
   proxy:
     image: nginx:latest
