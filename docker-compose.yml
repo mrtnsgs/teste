@@ -49,7 +49,7 @@ services:
     links:
       - elasticsearch
 
-networksd:
+networks:
 	webnet:
 
 volumes:
