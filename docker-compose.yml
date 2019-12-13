@@ -27,11 +27,14 @@ services:
       - web
   
   db:
-    image: elastic/elasticsearch:7.5.0
+          image: docker.elastic.co/elasticsearch/elasticsearch:7.5.0
     container_name: elasticsearch
     ports:
       - 9200:9200
       - 9300:9300
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.type=single-node"
     networks:
       - webnet
 
