@@ -6,14 +6,12 @@ services:
     container_name: tomcat
     environment:
       - "ES_JAVA_OPTS=-Xms300m -Xmx300m"
-    #ports:
-    #  - 8080
-    expose:
+    ports:
       - 8080
     networks:
       - webnet
-    depends_on:
-      - proxy
+    #depends_on:
+     #- proxy
 
   proxy:
     image: nginx:latest
@@ -25,9 +23,11 @@ services:
       - ./proxyconf:/etc/nginx/conf.d
     networks:
       - webnet
-    links:
-      - web
-  
+    #links:
+    #- web
+    depends_on:
+     - web
+
   db:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.5.0
     container_name: elasticsearch
@@ -46,6 +46,7 @@ services:
     ports:
       - 5601:5601
     environment:
+      #- ELASTICSEARCH_HOSTS=http://db:9200
       ELASTICSEARCH_HOSTS: http://db:9200
       SERVER_NAME: localhost
     networks:
