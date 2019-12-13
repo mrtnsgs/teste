@@ -6,7 +6,9 @@ services:
     container_name: tomcat
     environment:
       - "ES_JAVA_OPTS=-Xms300m -Xmx300m"
-    ports:
+    #ports:
+    #  - 8080
+    expose:
       - 8080
     networks:
       - webnet
@@ -44,8 +46,8 @@ services:
     ports:
       - 5601:5601
     environment:
-      - ELASTICSEARCH_HOSTS: http://db:9200
-      - SERVER_NAME: localhost
+      ELASTICSEARCH_HOSTS: http://db:9200
+      SERVER_NAME: localhost
     networks:
       - webnet
     depends_on: 
