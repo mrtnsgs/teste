@@ -5,9 +5,9 @@ services:
     image: tomcat:alpine
     container_name: tomcat
     ports:
-    	- "8080"
+      - "8080"
     networks:
-     	- webnet
+      - webnet
 
   proxy:
     image: nginx:latest
@@ -21,12 +21,12 @@ services:
       - webnet
     links:
       - web
-
-	db:
-		image: elastic/elasticsearch:7.5.0
-		container_name: elasticsearch
+  
+  db:
+    image: elastic/elasticsearch:7.5.0
+    container_name: elasticsearch
     ports:
-			- 9200:9200
+      - 9200:9200
     environment:
       - cluster.name=elasticsearch
       - bootstrap.memory_lock=true
@@ -36,13 +36,13 @@ services:
     links:
       - kibana
 
-	kibana:
-		image: docker.elastic.co/kibana/kibana:7.5.0
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.5.0
     container_name: kibana
-		ports:
-    	- 5601:5601
+    ports:
+      - 5601:5601
     environment:
-    	ELASTICSEARCH_HOSTS: localhost:9200
+      ELASTICSEARCH_HOSTS: localhost:9200
       ELASTICSEARCH_URL: http://localhost:9200
     networks:
       - webnet
@@ -50,7 +50,7 @@ services:
       - elasticsearch
 
 networks:
-	webnet:
+  webnet:
 
 volumes:
   proxyconf:
